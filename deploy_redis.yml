@@ -1,18 +1,22 @@
-- name: Create Redis Pod
-  kubernetes.core.k8s:
-    kubeconfig: C:\Users\jy811\.kube\config
-    state: present
-    definition:
-      apiVersion: v1
-      kind: Pod
-      metadata:
-        name: redis
-        namespace: default
-        labels:
-          app: redis
-      spec:
-        containers:
-        - name: redis
-          image: docker.io/redis:latest
-          ports:
-          - containerPort: 6379
+---
+- name: Deploy Redis Pod
+  hosts: localhost
+  tasks:
+    - name: Create Redis Pod
+      kubernetes.core.k8s:
+        kubeconfig: C:\Users\jy811\.kube\config
+        state: present
+        definition:
+          apiVersion: v1
+          kind: Pod
+          metadata:
+            name: redis
+            namespace: default
+            labels:
+              app: redis
+          spec:
+            containers:
+            - name: redis
+              image: docker.io/redis:latest
+              ports:
+              - containerPort: 6379
