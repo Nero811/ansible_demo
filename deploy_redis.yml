@@ -1,9 +1,9 @@
----
 - name: Deploy Redis Pod
   hosts: localhost
   tasks:
     - name: Create Redis Pod
-      kubernetes.core.k8s:
+      local_action:
+        module: kubernetes.core.k8s
         kubeconfig: C:\Users\jy811\.kube\config
         state: present
         definition:
@@ -20,3 +20,4 @@
               image: docker.io/redis:latest
               ports:
               - containerPort: 6379
+
