@@ -3,8 +3,9 @@
   tasks:
     - name: Copy Kubeconfig to Remote
       ansible.builtin.copy:
-        src: C:\Users\jy811\.kube\config
+        src: C:/Users/jy811/.kube/config
         dest: /tmp/kubeconfig
+      delegate_to: localhost
 
     - name: Create Redis Pod
       kubernetes.core.k8s:
