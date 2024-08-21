@@ -1,4 +1,4 @@
-- name: Deploy Redis Pod
+- name: Deploy Redis Pod in Minikube
   hosts: localhost
   tasks:
     - name: Set up Kubeconfig path
