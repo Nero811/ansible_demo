@@ -1,16 +1,6 @@
 - name: Deploy Redis Pod in Minikube
   hosts: localhost
   tasks:
-    - name: Set up Kubeconfig path
-      ansible.builtin.set_fact:
-        kubeconfig_path: "C:\\Users\\jy811\\.kube\\config"
-
-    - name: Copy Kubeconfig to Remote
-      local_action:
-        module: ansible.builtin.copy
-        src: "{{ kubeconfig_path }}"
-        dest: /tmp/kubeconfig
-
     - name: Create Redis Pod
       kubernetes.core.k8s:
         kubeconfig: /tmp/kubeconfig
