@@ -3,7 +3,7 @@
   tasks:
     - name: Create Redis Pod
       kubernetes.core.k8s:
-        kubeconfig: /runner/.kube/config
+        kubeconfig: C:\Users\jy811\.kube\config
         state: present
         remote_src: yes
         definition:
