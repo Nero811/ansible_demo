@@ -1,22 +1,27 @@
-- name: Deploy Redis Pod in Minikube
+---
+- name: Deploy Ubuntu Pod in Minikube
   hosts: localhost
+  gather_facts: no
   tasks:
-    - name: Create Redis Pod
-      kubernetes.core.k8s:
-        kubeconfig: C:\Users\jy811\.kube\config
-        state: present
-        remote_src: yes
-        definition:
+    - name: Create Ubuntu Pod definition
+      copy:
+        content: |
           apiVersion: v1
           kind: Pod
           metadata:
-            name: redis
+            name: ubuntu-pod
             namespace: default
-            labels:
-              app: redis
           spec:
             containers:
-            - name: redis
-              image: docker.io/redis:latest
-              ports:
-              - containerPort: 6379
+              - name: ubuntu
+                image: ubuntu:latest
+                command: ["sleep", "infinity"]
+        dest: /tmp/ubuntu-pod.yml
+
+    - name: Apply Pod definition to Minikube
+      command: kubectl apply -f /tmp/ubuntu-pod.yml
+      register: kubectl_output
+
+    - name: Output result
+      debug:
+        var: kubectl_output.stdout
